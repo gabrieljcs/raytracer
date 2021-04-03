@@ -2,8 +2,7 @@
 //  ray.h
 //  raytracer
 //
-//  Created by Gabriel de Jesus on 27/12/19.
-//  Copyright © 2019 Gabriel de Jesus. All rights reserved.
+//  Created by Gabriel de Jesus on 25/03/21.
 //
 
 #ifndef ray_h
@@ -11,30 +10,23 @@
 
 #include "vec3.h"
 
-class ray
-{
+class ray {
 public:
     ray() {}
-    ray(const vec3& a, const vec3& b) {
-        A = a;
-        B = b;
+    ray(const point3& origin, const vec3& direction)
+        : orig(origin), dir(direction)
+    {}
+    
+    point3 origin() const   { return orig; }
+    vec3 direction() const  { return dir; }
+    
+    point3 at(double t) const {
+        return orig + t*dir;
     }
     
-    vec3 origin() const {
-        return A;
-    }
-    
-    vec3 direction() const {
-        return B;
-    }
-    
-    vec3 point_at_parameter(float t) const {
-        return A + t*B;
-    }
-    
-    vec3 A;
-    vec3 B;
+public:
+    point3 orig;
+    vec3 dir;
 };
-
 
 #endif /* ray_h */
